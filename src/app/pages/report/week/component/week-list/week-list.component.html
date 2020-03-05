@@ -1,0 +1,135 @@
+<div class="list-container">
+    <div class="page-container mat-elevation-z8">
+        <h4>Week wise report</h4>
+        <div class='commandbar-container'>
+            <div class="row">
+                <div class="col-sm-8 col-xs-8 col-md-6 col-lg-6" >
+                    <p>
+                        0 / 100 
+                        <span class="filter-icon">
+                            <button mat-icon-button color="dark" aria-label="Filter data with a filter icon" (click)="openFilter()">
+                                <mat-icon>tune</mat-icon>
+                                </button>
+                        </span>
+                    </p> 
+                </div>
+                <div class="col-sm-4 col-xs-4 col-md-6 col-lg-6 d-flex" >
+                    <p class="ml-auto">
+                        <span class="download-icon">
+                            <button mat-icon-button color="dark" aria-label="Filter data with a filter icon">
+                                <mat-icon>cloud_download</mat-icon>
+                                </button>
+                        </span> 
+                        <!-- <span>
+                            <button class="add-icon" mat-icon-button color="dark" aria-label="Filter data with a filter icon" (click)="addItem()">
+                                <mat-icon>add</mat-icon>
+                                </button>
+                        </span> -->
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class='filter-container'>
+            <mat-chip-list aria-label="Fish selection">
+                <mat-chip removable = "true" (removed)="removeFilter(i)"  *ngFor="let filter of filters; let i = index" color="light">
+                    {{filter.name}}
+                    <mat-icon>chevron_right</mat-icon>
+                    {{filter.val}}
+                    <mat-icon matChipRemove>cancel</mat-icon>
+                </mat-chip>
+              </mat-chip-list>
+        </div>
+        
+        <div class="table-container">
+            <table mat-table [dataSource]="dataSource" matSort matSortActive="created"
+                matSortDisableClear matSortDirection="desc">
+                <ng-container matColumnDef="vehicle_no" width="250">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+                        Vehicle number
+                    </th>
+                    <td mat-cell *matCellDef="let row">{{row.vehicle_no }}</td>
+                </ng-container>
+                <ng-container matColumnDef="total_date" width="250">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+                        Fuel count
+                    </th>
+                    <td mat-cell *matCellDef="let row">{{row.total_date }}</td>
+                </ng-container>
+                <ng-container matColumnDef="week" width="250">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+                        Week
+                    </th>
+                    <td mat-cell *matCellDef="let row">{{row.week }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="driver_number">
+                    <th mat-header-cell *matHeaderCellDef>Driver number</th>
+                    <td mat-cell *matCellDef="let row">{{row.driver_number}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="vehicle_type">
+                    <th mat-header-cell *matHeaderCellDef>Vehicle type</th>
+                    <td mat-cell *matCellDef="let row">{{row.vehicle_type}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="month">
+                    <th mat-header-cell *matHeaderCellDef>Fuel month</th>
+                    <td mat-cell *matCellDef="let row">{{row.month}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="litre">
+                    <th mat-header-cell *matHeaderCellDef>Litre</th>
+                    <td mat-cell *matCellDef="let row">{{row.litre}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="mileage">
+                    <th mat-header-cell *matHeaderCellDef>Mileage</th>
+                    <td mat-cell *matCellDef="let row">{{row.mileage}}</td>
+                </ng-container>
+                <ng-container matColumnDef="internal_expect_mileage">
+                    <th mat-header-cell *matHeaderCellDef>Internal expect mileage</th>
+                    <td mat-cell *matCellDef="let row">{{row.internal_expect_mileage}}</td>
+                </ng-container>
+                <ng-container matColumnDef="external_expect_mileage">
+                    <th mat-header-cell *matHeaderCellDef>External expect mileage</th>
+                    <td mat-cell *matCellDef="let row">{{row.external_expect_mileage}}</td>
+                </ng-container>
+                <ng-container matColumnDef="difference_mileage">
+                    <th mat-header-cell *matHeaderCellDef>Difference in mileage</th>
+                    <td mat-cell *matCellDef="let row">{{row.difference_mileage}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="amount">
+                    <th mat-header-cell *matHeaderCellDef>Amount</th>
+                    <td mat-cell *matCellDef="let row">{{row.amount}}</td>
+                </ng-container>
+                <ng-container matColumnDef="expect_amount">
+                    <th mat-header-cell *matHeaderCellDef>Expect amount</th>
+                    <td mat-cell *matCellDef="let row">{{row.expect_amount}}</td>
+                </ng-container>
+                <ng-container matColumnDef="difference_amount">
+                    <th mat-header-cell *matHeaderCellDef>Difference in amount</th>
+                    <td mat-cell *matCellDef="let row">{{row.difference_amount}}</td>
+                </ng-container>
+                
+                <ng-container matColumnDef="status" stickyEnd style="background: #fff !important;">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td mat-cell *matCellDef="let row">
+                        <span><button class="action-btn profit" *ngIf="row.status === 'profit'">
+                                Profit
+                            </button></span>
+                        <span><button class="action-btn" *ngIf="row.status === 'loss'">
+                                Loss
+                            </button></span>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </div>
+
+        <mat-paginator [length]="dataSource.filteredData.length" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+    </div>
+</div>

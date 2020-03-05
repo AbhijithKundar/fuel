@@ -1,0 +1,27 @@
+
+table {
+    width: 2355px !important;
+    overflow-y:scroll;
+}
+
+
+td.mat-column-status {
+    width: 70px;
+    background-color: white;
+    .action-btn {
+        padding: 6px;
+        background:#a9a9a92b;
+        color: black;
+        width:70px;
+    }
+    
+    .profit {
+        background:#3f51b5cc !important;
+        color: white !important;
+    }
+}
+
+
+
+
+
